@@ -1,0 +1,191 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+      
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+            border: 2px;
+            border-color: black;
+            background-image: url('gis/image/search-icon.png');
+        }
+        html,head, #head {
+            position: fixed;
+            font-weight: bold;
+            text-decoration-color: blue;
+        }
+        </style>
+        <title>View Map</title>
+        <div id="head">
+            <h1></h1></div>
+    </head>
+    <body>
+        
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/Indonesia_by_desa_0.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-7.246481348604116,109.30407171839116],[-7.044578969276022,109.7677593470685]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_Indonesia_by_desa_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>PROVINSI</strong><br />' + (feature.properties['PROVINSI'] !== null ? autolinker.link(feature.properties['PROVINSI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KECAMATAN</strong><br />' + (feature.properties['KECAMATAN'] !== null ? autolinker.link(feature.properties['KECAMATAN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>DESA</strong><br />' + (feature.properties['DESA'] !== null ? autolinker.link(feature.properties['DESA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Penduduk</strong><br />' + (feature.properties['Penduduk'] !== null ? autolinker.link(feature.properties['Penduduk'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Covid19</strong><br />' + (feature.properties['Covid19'] !== null ? autolinker.link(feature.properties['Covid19'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SUMBER</strong><br />' + (feature.properties['SUMBER'] !== null ? autolinker.link(feature.properties['SUMBER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Indonesia_by_desa_0_0(feature) {
+            if (feature.properties['Penduduk'] >= 2000.000000 && feature.properties['Penduduk'] <= 3000.000000 ) {
+                return {
+                pane: 'pane_Indonesia_by_desa_0',
+                opacity: 1,
+                color: 'rgba(56,128,54,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(58,214,19,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Penduduk'] >= 3000.000000 && feature.properties['Penduduk'] <= 6000.000000 ) {
+                return {
+                pane: 'pane_Indonesia_by_desa_0',
+                opacity: 1,
+                color: 'rgba(56,128,54,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,154,48,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Penduduk'] >= 6000.000000 && feature.properties['Penduduk'] <= 10256.000000 ) {
+                return {
+                pane: 'pane_Indonesia_by_desa_0',
+                opacity: 1,
+                color: 'rgba(56,128,54,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,116,44,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Indonesia_by_desa_0');
+        map.getPane('pane_Indonesia_by_desa_0').style.zIndex = 400;
+        map.getPane('pane_Indonesia_by_desa_0').style['mix-blend-mode'] = 'normal';
+        var layer_Indonesia_by_desa_0 = new L.geoJson(json_Indonesia_by_desa_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Indonesia_by_desa_0',
+            layerName: 'layer_Indonesia_by_desa_0',
+            pane: 'pane_Indonesia_by_desa_0',
+            onEachFeature: pop_Indonesia_by_desa_0,
+            style: style_Indonesia_by_desa_0_0,
+        });
+        bounds_group.addLayer(layer_Indonesia_by_desa_0);
+        map.addLayer(layer_Indonesia_by_desa_0);
+        setBounds();
+        var i = 0;
+        layer_Indonesia_by_desa_0.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['DESA'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['DESA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Indonesia_by_desa_0'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        map.addControl(new L.Control.Search({
+            layer: layer_Indonesia_by_desa_0,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'DESA'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        resetLabels([layer_Indonesia_by_desa_0]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Indonesia_by_desa_0]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Indonesia_by_desa_0]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Indonesia_by_desa_0]);
+        });
+        </script>
+    </body>
+</html>
